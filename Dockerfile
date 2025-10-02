@@ -11,6 +11,7 @@ COPY package*.json ./
 
 # Install production dependencies (works with or without package-lock.json)
 RUN npm install --production --silent
+RUN npm install dotenv --production
 
 # Copy app source
 COPY . .
