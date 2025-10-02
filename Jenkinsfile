@@ -11,9 +11,9 @@ pipeline {
       // APP_IMAGE      = "node-notes-app:${GIT_COMMIT.take(8)}"
       APP_IMAGE      = "node-notes-app:latest"
       APP_PORT       = "3000"
-      CONTAINER_PORT = "8000"
+      CONTAINER_PORT = "3000"
       BUILD_CONTEXT  = "."
-      MONGO_TIMEOUT  = "60"
+      MONGO_TIMEOUT  = "180"
   }
 
     stages {
@@ -80,10 +80,11 @@ pipeline {
                 echo "Waiting for Mongo to be ready..."
                 start_ts=$(date +%s)
                 while true; do
-                  if docker exec "${MONGO_CONTAINER}" mongo --eval "db.adminCommand('ping')" >/dev/null 2>&1; then
-                    echo "Mongo ready"
-                    break
-                  fi
+                   if docker exec "${MONGO_CONTAINER}" mongosh --quiet --eval "db.adminCommand('ping')" >/dev/null 2>&1 \
+                        || docker exec "${MONGO_CONTAINER}" mongo --quiet --eval "db.adminCommand('ping')" >/dev/null 2>&1; then
+                        echo "Mongo responds"
+                        break
+                   fi
                   if [ $(( $(date +%s) - start_ts )) -gt ${MONGO_TIMEOUT} ]; then
                     echo "Mongo did not become ready in ${MONGO_TIMEOUT}s"
                     docker logs --tail 200 "${MONGO_CONTAINER}" || true

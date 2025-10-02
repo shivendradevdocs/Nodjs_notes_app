@@ -7,7 +7,7 @@ This app can do:
 - CRUD Operations: create/read/update/delete Notes
 - Allows a user to do login and save his personal notes
 
-![](docs/screenshot.png)
+- The Deployment process is made faster using jenkins ci-cd pipeline
 
 ### Installation
 
@@ -44,10 +44,5 @@ when the app is lauched, this will create an Admin user with the following crede
 - email: `admin@localhost`
 - password: `adminpassword`
 
-### Tutorial
-
-This app was created with educational purposes, so you can found the tutorials in the following links:
-
-- [Version 2](https://www.youtube.com/playlist?list=PLo5lAe9kQrwqUEXK7oQbzv63KsdODzuAy), new tutorial made in 2020
-  and these are old tutorials about this app
-- [Version 1.0.0](https://youtu.be/-bI0diefasA)
+![alt text](/images/image.png)
+![alt text](/images/image-1.png)
